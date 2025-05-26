@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMINEUR - CuraFlow</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="curaflow.css">
+</head>
+<body>
+    <div class="curaflow-page">
+        <header class="page-header">
+            <h1>CuraFlow</h1>
+            <p>Your drug delivery formulation begins here</p>
+        </header>
+
+        <div class="modules-grid">
+            <!-- Therapeutic Context -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>Therapeutic Context</h2>
+                    <p>Disease, Product type</p>
+                </div>
+            </div>
+
+            <!-- Drug Molecule -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>Drug Molecule</h2>
+                    <p>Structure, properties</p>
+                </div>
+            </div>
+
+            <!-- Nanocarrier Composition -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>Nanocarrier Composition</h2>
+                    <p>Materials, components</p>
+                </div>
+            </div>
+
+            <!-- Formulation Process -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>Formulation Process</h2>
+                    <p>Method, parameters</p>
+                </div>
+            </div>
+
+            <!-- Characterization -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>Characterization</h2>
+                    <p>Particles, stability</p>
+                </div>
+            </div>
+
+            <!-- In Vitro -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>In Vitro</h2>
+                    <p>Release, uptake</p>
+                </div>
+            </div>
+
+            <!-- In Vivo -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>In Vivo</h2>
+                    <p>Biodistribution, efficacy</p>
+                </div>
+            </div>
+
+            <!-- Manufacturability -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>Manufacturability</h2>
+                    <p>Scale-up, quality</p>
+                </div>
+            </div>
+
+            <!-- Sustainability / Clinical -->
+            <div class="module">
+                <div class="module-content">
+                    <h2>Sustainability / Clinical</h2>
+                    <p>Impact, translation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Luma Chatbot -->
+    <div class="luma-container" id="luma-container">
+        <img src="images/UI/LUma_icon-removebg-preview.png" alt="Luma Assistant" class="luma-icon">
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <h3>Chat with Luma</h3>
+                <button class="close-chat">×</button>
+            </div>
+            <div class="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="curaflow.js"></script>
+</body>
+</html>

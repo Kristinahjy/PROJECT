@@ -5,17 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUMINEUR - Intelligent Drug Delivery Design</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="stars"></div>
-    <div class="welcome-container">
-        <h1 class="logo">LUMINEUR</h1>
-        <div class="tagline">Intelligent Design for Drug Delivery</div>
-        <div class="welcome-text">
-            Welcome to the Future of Drug Delivery Systems
+    <div class="landing-page active" id="landing-page">
+        <div class="background-overlay"></div>
+        <div class="background-image"></div>
+        <div class="stars"></div>
+        <div class="welcome-container">
+            <div class="logo-container">
+                <img src="images/UI/Lumineur.png" alt="Lumineur" class="logo">
+            </div>
+            <button class="enter-btn" id="enter-btn">Enter</button>
         </div>
-        <button class="enter-btn">Enter</button>
     </div>
+
+    <div class="welcome-page" id="welcome-page">
+        <div class="welcome-content">
+            <h1>Welcome to LUMINEUR</h1>
+            <p>You are now entering a space where drug delivery is not just engineered – it's envisioned.</p>
+            <p>Here, your ideas matter.<br/>
+            Here, data speaks softly and clearly.<br/>
+            Here, our <strong class="highlight">WhisperMed™</strong> engine is listening.</p>
+            <p>Ready to let your formulation breathe, flow, and evolve?<br/>
+            Let <strong class="highlight">Luma</strong> and <strong class="highlight">CuraFlow</strong> guide the way.</p>
+            <button class="start-btn" id="start-btn" onclick="window.location.href='nanocarrier-grid.html'">Start Designing</button>
+            <p class="tagline">Lumineur is not just a platform — it's a guide, a lighthouse, and a canvas for researchers, scientists, and creators to bring their drug delivery visions to life with clarity and harmony.</p>
+        </div>
+    </div>
+
+    <div class="luma-container" id="luma-container">
+        <img src="images/UI/LUma_icon-removebg-preview.png" alt="Luma Assistant" class="luma-icon">
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <h3>Chat with Luma</h3>
+                <button class="close-chat">×</button>
+            </div>
+            <div class="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

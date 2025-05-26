@@ -3,6 +3,11 @@
     --space-purple: #1A1A3A;
     --golden: #FFD700;
     --golden-light: #FFF5CC;
+    --lavender: #E6E6FA;
+    --background-primary: linear-gradient(45deg, var(--space-dark), var(--space-purple));
+    --background-secondary: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    --shadow-primary: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 12px 40px rgba(255, 215, 0, 0.2);
 }
 
 * {
@@ -12,12 +17,54 @@
 }
 
 body {
-    background: linear-gradient(45deg, var(--space-dark), var(--space-purple));
-    height: 100vh;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
     color: white;
     overflow: hidden;
     position: relative;
+    background: linear-gradient(135deg, var(--space-dark), var(--space-purple));
+    min-height: 100vh;
+}
+
+/* Landing Page */
+.landing-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s ease-in-out;
+    z-index: 10;
+}
+
+.landing-page.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(11, 11, 31, 0.8), rgba(26, 26, 58, 0.6));
+    z-index: 1;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/UI/Lumineur_ Intelligent Design for Delivery (1).png');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    opacity: 0.7;
+    filter: brightness(0.8) contrast(1.2);
 }
 
 .stars {
@@ -27,37 +74,22 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background: radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(0,0,0,0.8) 100%);
-}
-
-.stars::before,
-.stars::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(2px 2px at 20px 30px, white, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 40px 70px, white, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 50px 160px, white, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 90px 40px, white, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 130px 80px, white, rgba(0,0,0,0));
+    z-index: 1;
+    background: 
+        radial-gradient(2px 2px at 20px 30px, var(--golden-light), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, var(--golden-light), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, var(--golden-light), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, var(--golden-light), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 130px 80px, var(--golden-light), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, var(--golden-light), rgba(0,0,0,0));
     background-repeat: repeat;
-    background-size: 200px 200px;
-    animation: twinkle 5s infinite;
+    animation: stars 8s linear infinite;
+    opacity: 0.6;
 }
 
-.stars::after {
-    background-size: 300px 300px;
-    animation-delay: 2s;
-}
-
-@keyframes twinkle {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
+@keyframes stars {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100%); }
 }
 
 .welcome-container {
@@ -65,58 +97,414 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 2;
     text-align: center;
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo-container {
+    margin-bottom: 0.5rem;
 }
 
 .logo {
-    font-size: 5rem;
-    font-weight: bold;
-    background: linear-gradient(to right, var(--golden), var(--golden-light));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-    margin-bottom: 1rem;
-    animation: glow 3s infinite;
+    max-width: 400px;
+    height: auto;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.3));
+    animation: floatLogo 6s ease-in-out infinite, glowLogo 3s ease-in-out infinite;
 }
 
-@keyframes glow {
-    0% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-    50% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.5); }
-    100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+@keyframes floatLogo {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(5deg); }
+    50% { transform: translateY(0) rotate(0deg); }
+    75% { transform: translateY(15px) rotate(-5deg); }
 }
 
-.tagline {
-    font-size: 1.5rem;
-    color: var(--golden-light);
-    margin-bottom: 2rem;
-    opacity: 0.9;
+@keyframes glowLogo {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3)); }
+    50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.5)); }
 }
 
-.welcome-text {
-    font-size: 1.2rem;
-    color: white;
-    margin-bottom: 3rem;
-    opacity: 0.8;
-}
-
-.enter-btn {
-    background: transparent;
-    border: 2px solid var(--golden);
-    color: var(--golden);
-    padding: 1rem 3rem;
-    font-size: 1.2rem;
+/* Buttons */
+.enter-btn, .start-btn {
+    background: linear-gradient(135deg, var(--golden), var(--golden-light));
+    color: var(--space-dark);
+    padding: 1.2rem 4rem;
+    font-size: 1.3rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    border: none;
     border-radius: 30px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    animation: fadeIn 1s ease-out;
+    backdrop-filter: blur(10px);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
 }
 
-.enter-btn:hover {
-    background: var(--golden);
+.enter-btn::before, .start-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.enter-btn:hover::before, .start-btn:hover::before {
+    left: 100%;
+}
+
+.enter-btn:hover, .start-btn:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+    background: linear-gradient(135deg, var(--golden-light), var(--golden));
+}
+
+/* Welcome Page */
+.welcome-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.welcome-page::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/UI/Lumineur_ Intelligent Design for Delivery (1).png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+    filter: brightness(0.8) contrast(1.2);
+    z-index: -2;
+}
+
+.welcome-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(11, 11, 31, 0.9), rgba(26, 26, 58, 0.8));
+    z-index: -1;
+}
+
+.welcome-page.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.welcome-page:not(.active) {
+    transform: translateY(20px);
+}
+
+.welcome-content {
+    max-width: 800px;
+    margin-top: 0.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    animation: fadeScale 0.8s ease-out;
+    transform: scale(0.72);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    padding: 3rem;
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeScale {
+    from {
+        opacity: 0;
+        transform: scale(0.61);
+    }
+    to {
+        opacity: 1;
+        transform: scale(0.64);
+    }
+}
+
+.welcome-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    color: var(--golden);
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+    letter-spacing: 2px;
+    font-weight: 700;
+    position: relative;
+}
+
+.welcome-content h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--golden), transparent);
+}
+
+.welcome-content p {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    max-width: 700px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+}
+
+.highlight {
+    color: var(--golden);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    animation: pulse 2s infinite;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--golden), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.8; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+    50% { opacity: 1; text-shadow: 0 0 25px rgba(255, 215, 0, 0.7); }
+    100% { opacity: 0.8; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.welcome-content p:nth-child(2) { animation-delay: 0.2s; }
+.welcome-content p:nth-child(3) { animation-delay: 0.4s; }
+.welcome-content p:nth-child(4) { animation-delay: 0.6s; }
+.welcome-content p:nth-child(5) { animation-delay: 0.8s; }
+
+/* Luma Chatbot */
+.luma-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 30;
+}
+
+.luma-icon {
+    width: 100px !important;
+    height: 100px !important;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    max-width: none;
+    max-height: none;
+    animation: floatIcon 4s ease-in-out infinite;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.luma-icon:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 8px 16px rgba(255, 215, 0, 0.3));
+}
+
+.chat-window {
+    position: absolute;
+    bottom: 120px;
+    right: 0;
+    width: 400px;
+    height: 600px;
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(40, 40, 40, 0.95));
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    display: none;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chat-window.active {
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.chat-header {
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    color: var(--golden);
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.close-chat {
+    background: none;
+    border: none;
+    color: var(--golden);
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all 0.2s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-chat:hover {
+    opacity: 1;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: rgba(20, 20, 20, 0.5);
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 12px 16px;
+    border-radius: 15px;
+    max-width: 80%;
+    word-wrap: break-word;
+    animation: messageIn 0.3s ease-out;
+}
+
+@keyframes messageIn {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.message.user {
+    background: linear-gradient(135deg, var(--golden), var(--golden-light));
     color: var(--space-dark);
-    transform: scale(1.05);
+    margin-left: auto;
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.2);
+}
+
+.message.luma {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-right: auto;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.chat-input {
+    padding: 20px;
+    display: flex;
+    gap: 12px;
+    background: rgba(20, 20, 20, 0.8);
+    border-top: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.chat-input input:focus {
+    outline: none;
+    border-color: var(--golden);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+}
+
+.chat-input button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--golden), var(--golden-light));
+    color: var(--space-dark);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    font-weight: 500;
+}
+
+.chat-input button:hover {
+    transform: translateY(-2px);
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, var(--golden), var(--golden));
 }
